@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      <h:head>
+        <title>Preparar Detalles</title>
+
+      </h:head>
+    <h:body>
+
+        <f:view>
+
+
+            <h:form id="fDetalle">
+                           <div style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+        <p:link value="Volver Menú" outcome="indexFuncionario"/>
+        </div>
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Preparar Detalle"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Código Detalle" for="codDetalle" />
+                    <p:inputText id="codDetalle" value="#{detalleBean.detalle.codDetalle}" title="CodDetalle" required="true" requiredMessage="El código es requerido"/>
+                    <p:outputLabel value="Lote" for="loteCodLote" />
+                    <p:selectOneMenu id="loteCodLote" value="#{detalleBean.loteMedicamento.codLoteMed}" required="true" requiredMessage="Seleccione o ingrese un lote">                      
+                        <f:selectItems value="#{loteMedBean.lotesMedicamentos}" var="l" itemLabel="#{l.codLoteMed}" itemValue="#{l.codLoteMed}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Medicamento" for="medicamentoCodMedicamento" />
+                    <p:selectOneMenu id="medicamentoCodMedicamento" value="#{detalleBean.medicamento.codMedicamento}" required="true" requiredMessage="Seleccione un medicamento o ingrese su código">                     
+                        <f:selectItems value="#{medicamentoBean.medicamentos}" var="m" itemLabel="#{m.descripcionMedicamento}" itemValue="#{m.codMedicamento}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Código de Prescripción para asignar" for="prescripcionCodPrescripcion" />
+                    <p:selectOneMenu id="prescripcionCodPrescripcion" value="#{detalleBean.prescripcion.codPrescripcion}" required="true" requiredMessage="Ingrese un número de prescripción">                      
+                        <f:selectItems value="#{prescripcionBean.prescripciones}" var="p" itemLabel="#{p.codPrescripcion}" itemValue="#{p.codPrescripcion}"/>
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Ingresar Detalle Medicamento" actionListener="#{detalleBean.create()}" update="fDetalle" />
+
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+
+
+    </h:body>
+</html>
+

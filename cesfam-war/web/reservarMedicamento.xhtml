@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      <h:head>
+        <title>Reservar Medicamentos Funcionario</title>
+      </head>
+      <h:body>
+        <h:form id="fReserva">
+                       <div style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+        <p:link value="Volver Menú" outcome="indexFuncionario"/>
+        </div>
+            <p:growl id="msg"/>
+            <h1><h:outputText value="Reservar Medicamento"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="CodReserva" for="codReserva" />
+                <p:inputText id="codReserva" value="#{reservaBean.reserva.codReserva}" title="Código de Reserva:" required="true" requiredMessage="El Código de Reserva es requerido."/>
+                <p:outputLabel value="Cantidad:" for="cantidad" />
+                <p:inputText id="cantidad" value="#{reservaBean.reserva.cantidad}" title="Cantidad:" required="true" requiredMessage="La cantidad es requerida"/>
+
+                <p:outputLabel value="Medicamento:" for="medicamentoCodMedicamento" />
+                <p:selectOneMenu id="medicamentoCodMedicamento" value="#{reservaBean.medicamento.codMedicamento}" required="true" requiredMessage="Porfavor, escoga un medicamento a reservar">
+                    <!-- TODO: update below reference to list of available items-->
+                    <f:selectItems value="#{medicamentoBean.medicamentos}" var="m" itemLabel="#{m.descripcionMedicamento}" itemValue="#{m.codMedicamento}"/>
+                </p:selectOneMenu>
+
+                <p:inputText id="codLote" value="#{reservaBean.loteMedicamento.codLoteMed}" title="Código de Lote" required="true" requiredMessage="The Cantidad field is required."/>
+
+
+                <p:commandButton value="Registrar Operación" actionListener="#{reservaBean.create()}" update="fReserva"  />
+
+
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

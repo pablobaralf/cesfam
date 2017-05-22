@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <script>
+
+
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+
+        </script>
+        <title>Ingreso Lotes Medicamentos</title>
+
+    </h:head>
+    <h:body>
+
+        <f:view>
+
+
+            <h:form id="fLoteMedicamento">
+                  <div style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+        <p:link value="Volver Menú" outcome="indexFuncionario"/>
+        </div>
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Ingreso de Lotes"/></h1>
+                <p:panelGrid columns="2" style="display: block; align-items: center">
+                    <p:outputLabel value="Código de Lote:" for="codLote" />
+                    <p:inputText id="codLote" value="#{loteMedBean.loteMedicamento.codLoteMed}" title="CodLote" required="true" requiredMessage="Ingrese un código"/>                   
+                    <p:outputLabel value="Fecha de Vencimiento:" for="fechaVencimiento" />
+                    <p:calendar id="fechaVencimiento" value="#{loteMedBean.loteMedicamento.fechaVencimiento}" title="FechaVencimiento" locale="es" validator="#{validacionesBean.validateFechaVencimiento}" required="true" requiredMessage="Ingrese una fecha de vencimiento"/>
+                    <p:outputLabel value="Cantidad:" for="cantidad" />
+                    <p:inputText id="cantidad" value="#{loteMedBean.loteMedicamento.cantidad}" title="Cantidad" validator="#{validacionesBean.validateUnidadMinYMax}" required="true" requiredMessage="La Cantidad es requerida"/>
+                    <p:outputLabel value="Medicamento" for="medicamentoCodMedicamento" />
+                    <p:selectOneMenu id="medicamentoCodMedicamento" value="#{loteMedBean.medicamento.codMedicamento}" required="true" requiredMessage="Eliga un medicamento al cual ingresarle un lote">
+                        <f:selectItems value="#{medicamentoBean.medicamentos}" var="m" itemLabel="#{m.descripcionMedicamento}" itemValue="#{m.codMedicamento}"/>
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Registrar Operación" actionListener="#{loteMedBean.create()}" update="fLoteMedicamento"  />
+
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+
+    </h:body>
+</html>
+

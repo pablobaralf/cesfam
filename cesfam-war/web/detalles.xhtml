@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Detalles Generados</title>
+        <f:event type="preRenderView" listener="#{funcionarioBean.verificarSesion()}"/> 
+
+    </h:head>
+    <h:body>
+
+        <h:form>
+            <div id="menusito" style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+        <p:link value="Volver Menú" outcome="indexFuncionario"/>
+        </div>
+            <h:outputText value="Cancelar detalle (Código Detalle): " />
+            <h:inputText value="#{detalleBean.detalle.codDetalle}"/>
+
+
+            <h:commandButton value="Eliminar" 
+                             actionListener="#{detalleBean.eliminar()}"
+                             />
+        </h:form>
+        <h:form id="form">
+            <p:growl id="msg"/>
+            <p:dataTable  value="#{detalleBean.detalles}" var="item">
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Código de Detalle"/>
+                    </f:facet>
+
+                    <h:outputText value="##{item.codDetalle}" />
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Emision"/>
+                    </f:facet>
+                    <h:outputText value="#{item.fechaEmision}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" timeZone="America/Santiago"/>
+                    </h:outputText>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cantidad"/>
+                    </f:facet>
+                    <h:outputText value="#{item.cantidad}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lote"/>
+                    </f:facet>
+                    <h:outputText value="##{item.loteMedCodLote.codLoteMed}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Medicamento"/>
+                    </f:facet>
+                    <h:outputText value="#{item.medicamentoCodMedicamento.descripcionMedicamento}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prescripción"/>
+                    </f:facet>
+                    <h:outputText value="##{item.prescripcionCodPrescripcion.codPrescripcion}"/>
+                </p:column>
+                 <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prescripción"/>
+                    </f:facet>
+                     <h:outputText value="#{item.prescripcionCodPrescripcion.estado}"/>
+                </p:column>
+
+
+
+            </p:dataTable>
+        </h:form>
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Ingresar Prescripciones </title>
+        <f:event type="preRenderView" listener="#{medicoBean.verificarSesion()}"/> 
+
+    </h:head>
+    <h:body>
+        <h:form id="fPrescripcion">
+           <div style ="display: block; text-align: right">
+                <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/>
+                <p:link value="Volver Menú" outcome="indexMedico" />
+            </div>
+            <p:growl id="msg"/>
+            <h1><h:outputText value="Ingreso de Prescripción"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Código Prescripción" for="codPrescripcion" />
+                <p:inputText id="codPrescripcion" value="#{prescripcionBean.prescripcion.codPrescripcion}" title="CodPrescripcion"  required="true" requiredMessage="El Código de Prescripción es requerido"/>
+                <p:outputLabel value="Cantidad Dósis(Al día)" for="cantidadDiaria" />
+                <p:inputText id="cantidadDiaria" value="#{prescripcionBean.prescripcion.cantidadDiaria}" title="CantidadDiaria" validator="#{validacionesBean.validateCantidadDiaria}" required="true" requiredMessage="La cantidad diaria es requerida"/>
+                <p:outputLabel value="Duración Tratamiento:" for="duracionTratamiento" />
+                <p:inputText id="duracionTratamiento" value="#{prescripcionBean.prescripcion.duracionTratamiento}" title="DuracionTratamiento" validator="#{validacionesBean.validateDuracionTratamiento}" required="true" requiredMessage="La duración del tratamiento es requerida"/>
+                <p:outputLabel value="Médico:" for="medicoCodMedico" />
+                <p:selectOneMenu id="medicoCodMedico" value="#{prescripcionBean.medico.codMedico}" required="true" requiredMessage="The MedicoCodMedico field is required.">
+                    <!-- TODO: update below reference to list of available items-->
+                    <f:selectItems value="#{medicoBean.medicos}" var="m" itemLabel="#{m.rut.nombre} #{m.rut.apellido}" itemValue="#{m.codMedico}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton value="Ingresar Prescripción" actionListener="#{prescripcionBean.create()}" update="fPrescripcion"  />
+
+
+            </p:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

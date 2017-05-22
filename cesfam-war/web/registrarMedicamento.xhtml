@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+        <h:head>
+        <title>Registro de Medicamentos</title>
+        <f:event type="preRenderView" listener="#{funcionarioBean.verificarSesion()}"/> 
+
+        </h:head>
+    <h:body>
+
+        <f:view>
+
+
+            <h:form id="fMedicamento">
+                           <div style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+        <p:link value="Volver Menú" outcome="indexFuncionario"/>
+        </div>
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Registro de nuevo medicamento: "/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Código de Medicamento" for="codMedicamento" />
+                    <p:inputText id="codMedicamento" value="#{medicamentoBean.medicamento.codMedicamento}" title="CodMedicamento" required="true" requiredMessage="El código es requerido"/>
+                    <p:outputLabel value="Descripción (Nombre medicamento)" for="descripcionMedicamento" />
+                    <p:inputText id="descripcionMedicamento" value="#{medicamentoBean.medicamento.descripcionMedicamento}" title="DescripcionMedicamento)" required="true" requiredMessage="La descripción es requerida"/>
+                    <p:outputLabel value="Principio activo" for="principioActivo" />
+                    <p:inputText id="principioActivo" value="#{medicamentoBean.medicamento.principioActivo}" title="PrincipioActivo" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El Principio Activo es Requerido"/>
+                    <p:outputLabel value="Componentes" for="componentes" />
+                    <p:inputText id="componentes" value="#{medicamentoBean.medicamento.componentes}" title="Componentes" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="Ingrese Componentes"/>
+                    <p:outputLabel value="Contenido(dósis que trae)" for="contenido" />
+                    <p:inputText id="contenido" value="#{medicamentoBean.medicamento.contenido}" title="Contenido" validator="#{validacionesBean.validateContenido}" required="true" requiredMessage="Ingrese la cantidad de dósis que trae"/>
+                    <p:outputLabel value="Gramaje(mg)" for="gramaje" />
+                    <p:inputText id="gramaje" value="#{medicamentoBean.medicamento.gramaje}" title="Gramaje" validator="#{validacionesBean.validateGramaje}" required="true" requiredMessage="Ingrese el gramaje"/>
+                    <p:outputLabel value="Tipo de Medicamento" for="tipoCodTipo" />
+                    <p:selectOneMenu id="tipoCodTipo" value="#{medicamentoBean.tipo.codTipo}" required="true" requiredMessage="Seleccione un tipo de medicamento">
+                        <f:selectItems value="#{tipoBean.tipos}" var="t" itemLabel="#{t.descripcionTipo}" itemValue="#{t.codTipo}"/>
+                    </p:selectOneMenu>                   
+                    <p:outputLabel value="Fabricante" for="fabricanteCodFabricante" />
+                    <p:selectOneMenu id="fabricanteCodFabricante" value="#{medicamentoBean.fabricante.codFabricante}" required="true" requiredMessage="Seleccione un fabricante">
+                        <f:selectItems value="#{fabricanteBean.fabricantes}" var="f" itemLabel="#{f.descripcionFabricante}" itemValue="#{f.codFabricante}"/>
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Registrar Medicamento" actionListener="#{medicamentoBean.create()}" update="fMedicamento"  />
+
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+
+    </h:body>
+</html>
+

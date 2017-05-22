@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      <h:head>
+        <title>Registro de Artículos</title>
+
+      </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form id="fArticulo">
+                           <div style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+        <p:link value="Volver Menú" outcome="indexFuncionario"/>
+        </div>
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Registrar Artículo Médico"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Código de Articulo:" for="codArticulo" />
+                    <p:inputText id="codArticulo" value="#{articuloBean.articulo.codArticulo}" title="CodArticulo" required="true" requiredMessage="El código es requerido"/>
+                    <p:outputLabel value="Descripción (Nombre artículo):" for="descripcionArticulo" />
+                    <p:inputText id="descripcionArticulo" value="#{articuloBean.articulo.descripcionArticulo}" title="DescripcionArticulo" required="true" requiredMessage="Ingrese una descripción"/>
+                    <p:outputLabel value="Uso:" for="uso" />
+                    <p:inputText id="uso" value="#{articuloBean.articulo.uso}" title="Uso" required="true" requiredMessage="Especifique el uso que se le da al artículo"/>
+                </p:panelGrid>
+
+                <p:commandButton value="Registrar Artícuño" actionListener="#{articuloBean.create()}" update="fArticulo"  />
+
+
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

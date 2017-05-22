@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Registrar Tutor </title>
+        <f:event type="preRenderView" listener="#{medicoBean.verificarSesion()}"/> 
+
+    </h:head>
+    <h:body>
+        <h:form id="fTutor">
+            <div style ="display: block; text-align: right">
+                <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/>
+                <p:link value="Volver Menú" outcome="indexMedico" />
+            </div>
+
+            <p:separator/>
+            <p:growl id="msg"/>
+            <h1><h:outputText value="Registro de Tutor para Paciente"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Rut:" for="rutTutor" />
+                <p:inputText id="rutTutor" value="#{tutorBean.tutor.rutTutor}"  required="true" requiredMessage="El Rut es requerido"/>
+                <p:outputLabel value="Nombre:" for="nombre" />
+                <p:inputText id="nombre" value="#{tutorBean.tutor.nombre}" title="Nombre"  required="true" requiredMessage="El Nombre es requerido"/>
+                <p:outputLabel value="Apellido:" for="apellido" />
+                <p:inputText id="apellido" value="#{tutorBean.tutor.apellido}" title="Apellido"  required="true" requiredMessage="El Apellido es requerido"/>
+                <p:outputLabel value="Telefono:" for="telefono" />
+                <p:inputText id="telefono" value="#{tutorBean.tutor.telefono}" title="Telefono"  required="true" requiredMessage="El Número de Teléfono o Celular es requerido"/>
+                <p:outputLabel value="Email:" for="email" />
+                <p:inputText id="email" value="#{tutorBean.tutor.email}" title="Email" required="true"   requiredMessage="El Email es requerido"/>
+            </p:panelGrid>
+
+            <p:commandButton value="Registrar Tutor" actionListener="#{tutorBean.create()}" update="fTutor"  />
+        </h:form>
+
+
+    </h:body>
+</html>
+

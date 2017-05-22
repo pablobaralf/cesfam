@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form id="form">
+                <h1><h:outputText value="Control Lotes de Medicamentos" style="display: block; text-align: center"/></h1>
+                <p:dataTable value="#{loteMedBean.lotesMedicamentos}" var="item">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Código de Lote"/>
+                        </f:facet>
+                        <h:outputText value="##{item.codLoteMed}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Ingreso"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaIngreso}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Vencimiento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaVencimiento}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidad}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad Inicial"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadInicial}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Medicamento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.medicamentoCodMedicamento.descripcionMedicamento}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+        
+    </h:body>
+</html>
+

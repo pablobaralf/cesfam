@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Entregar Prescripción</title>
+    </h:head>
+    <h:body>
+
+
+        <f:view>
+
+
+            <h:form id="fEntrega">
+                  <div style="display: block; text-align: right">
+        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+        <p:separator/>
+                  </div>
+                <p:growl id="msg"/>
+                <h1><h:outputText value="Entregar Prescripción"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Código de Entrega:" for="codEntrega" />
+                    <p:inputText id="codEntrega" value="#{entregaBean.entrega.codEntrega}" title="CodEntrega" required="true" requiredMessage="El código de entrega es requerido"/>
+
+                    <p:outputLabel value="Formulario:" for="formularioCodFormulario" />
+                    <p:selectOneMenu id="formularioCodFormulario" value="#{entregaBean.formulario.codFormulario}" required="true" requiredMessage="Eliga un formulario">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{formularioBean.formularios}" var="f" itemLabel="#{f.codFormulario}" itemValue="#{f.codFormulario}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Prescripción:" for="prescripcionCodPrescripcion" />
+                    
+                    <p:selectOneMenu id="prescripcionCodPrescripcion" value="#{entregaBean.prescripcion.codPrescripcion}" required="true" requiredMessage="Eliga una prescripción">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{prescripcionBean.prescripciones}" var="p" itemLabel="#{p.codPrescripcion}" itemValue="#{p.codPrescripcion}"/>
+                    </p:selectOneMenu>
+
+                    <p:commandButton value="Entregar" actionListener="#{entregaBean.create()}" update="fEntrega"  /> <p:commandButton value="Cancelar" onclick="window.history.back()();"  />
+
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+
+
+    </h:body>
+</html>
+
