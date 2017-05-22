@@ -3,48 +3,50 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-  <h:head>
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
         <title>Registrar Paciente </title>
         <f:event type="preRenderView" listener="#{medicoBean.verificarSesion()}"/> 
 
     </h:head>
+    <ui:include src="header.xhtml"/>
     <h:body>
-                    <h:form id="fPaciente">
-  <div style ="display: block; text-align: right">
+        <h:form id="fPaciente">
+            <div style ="display: block; text-align: right">
                 <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/>
                 <p:link value="Volver Menú" outcome="indexMedico" />
             </div>
-                <p:growl id="msg"/>
-                <h1><h:outputText value="Registro de Paciente"/></h1>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="Rut Paciente:" for="rutPaciente" />
-                    <p:inputText id="rutPaciente" value="#{pacienteBean.paciente.rutPaciente}" title="RutPaciente" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El rut de paciente es requerido"/>
-                    <p:outputLabel value="Nombre:" for="nombre" />
-                    <p:inputText id="nombre" value="#{pacienteBean.paciente.nombre}" title="Nombre" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El Nombre es requerido"/>
-                    <p:outputLabel value="Apellido:" for="apellido" />
-                    <p:inputText id="apellido" value="#{pacienteBean.paciente.apellido}" title="Apellido" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El Apellido es requerido"/>
-                    <p:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
-                    <p:calendar id="fechaNacimiento" value="#{pacienteBean.paciente.fechaNacimiento}" title="FechaNacimiento" validator="#{validacionesBean.validateFechaNacimiento}"  required="true" requiredMessage="La Fecha de Nacimiento es requerida"/>
-                    <p:outputLabel value="Direccion:" for="direccion" />
-                    <p:inputText id="direccion" value="#{pacienteBean.paciente.direccion}" title="Direccion" validator="#{validacionesBean.validateTextos}"  required="true" requiredMessage="La Dirección es requerida"/>
-                    <p:outputLabel value="Telefono:" for="telefono" />
-                    <p:inputText id="telefono" value="#{pacienteBean.paciente.telefono}" title="Telefono" validator="#{validacionesBean.validateNumeroTelefonico}"   required="true" requiredMessage="El Número de Teléfono o Celular es requerido"/>
-                    <p:outputLabel value="Email:" for="email" />
-                    <p:inputText id="email" value="#{pacienteBean.paciente.email}" title="Email" validator="#{validacionesBean.validateTextos}"  required="true" requiredMessage="El Email es requerido"/>
-                    <p:outputLabel value="Rut Tutor:" for="tutorRutTutor" />
-                    <p:selectOneMenu id="tutorRutTutor" value="#{pacienteBean.tutor.rutTutor}" required="true" requiredMessage="El rut de tutor es requerido">
-                        <f:selectItems value="#{tutorBean.tutores}" var="t" itemLabel="#{t.rutTutor}" itemValue="#{t.rutTutor}" />
-                    </p:selectOneMenu>
-                    <p:outputLabel value="CarnetFamCodFam:" for="carnetFamCodFam" />
-                    <p:selectOneMenu id="carnetFamCodFam" value="#{pacienteBean.carnetFam.codCarnetFam}" required="true" requiredMessage="Eliga un Carnet Familiar">
-                        <f:selectItems value="#{carnetFamBean.carnetsFam}" var="c" itemLabel="#{c.color}" itemValue="#{c.codCarnetFam}"/>
-                    </p:selectOneMenu>
-                    
-                    <p:commandButton value="Registrar Paciente" actionListener="#{pacienteBean.create()}" update="fPaciente"  />
-                    
-                </p:panelGrid>
-            </h:form>
+            <p:growl id="msg"/>
+            <h1><h:outputText value="Registro de Paciente"/></h1>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Rut Paciente:" for="rutPaciente" />
+                <p:inputText id="rutPaciente" value="#{pacienteBean.paciente.rutPaciente}" title="RutPaciente" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El rut de paciente es requerido"/>
+                <p:outputLabel value="Nombre:" for="nombre" />
+                <p:inputText id="nombre" value="#{pacienteBean.paciente.nombre}" title="Nombre" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El Nombre es requerido"/>
+                <p:outputLabel value="Apellido:" for="apellido" />
+                <p:inputText id="apellido" value="#{pacienteBean.paciente.apellido}" title="Apellido" validator="#{validacionesBean.validateTextos}" required="true" requiredMessage="El Apellido es requerido"/>
+                <p:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
+                <p:calendar id="fechaNacimiento" value="#{pacienteBean.paciente.fechaNacimiento}" title="FechaNacimiento" validator="#{validacionesBean.validateFechaNacimiento}"  required="true" requiredMessage="La Fecha de Nacimiento es requerida"/>
+                <p:outputLabel value="Direccion:" for="direccion" />
+                <p:inputText id="direccion" value="#{pacienteBean.paciente.direccion}" title="Direccion" validator="#{validacionesBean.validateTextos}"  required="true" requiredMessage="La Dirección es requerida"/>
+                <p:outputLabel value="Telefono:" for="telefono" />
+                <p:inputText id="telefono" value="#{pacienteBean.paciente.telefono}" title="Telefono" validator="#{validacionesBean.validateNumeroTelefonico}"   required="true" requiredMessage="El Número de Teléfono o Celular es requerido"/>
+                <p:outputLabel value="Email:" for="email" />
+                <p:inputText id="email" value="#{pacienteBean.paciente.email}" title="Email" validator="#{validacionesBean.validateTextos}"  required="true" requiredMessage="El Email es requerido"/>
+                <p:outputLabel value="Rut Tutor:" for="tutorRutTutor" />
+                <p:selectOneMenu id="tutorRutTutor" value="#{pacienteBean.tutor.rutTutor}" required="true" requiredMessage="El rut de tutor es requerido">
+                    <f:selectItems value="#{tutorBean.tutores}" var="t" itemLabel="#{t.rutTutor}" itemValue="#{t.rutTutor}" />
+                </p:selectOneMenu>
+                <p:outputLabel value="CarnetFamCodFam:" for="carnetFamCodFam" />
+                <p:selectOneMenu id="carnetFamCodFam" value="#{pacienteBean.carnetFam.codCarnetFam}" required="true" requiredMessage="Eliga un Carnet Familiar">
+                    <f:selectItems value="#{carnetFamBean.carnetsFam}" var="c" itemLabel="#{c.color}" itemValue="#{c.codCarnetFam}"/>
+                </p:selectOneMenu>
+
+                <p:commandButton value="Registrar Paciente" actionListener="#{pacienteBean.create()}" update="fPaciente"  />
+
+            </p:panelGrid>
+        </h:form>
     </h:body>
 </html>
 
