@@ -1,16 +1,17 @@
-package bean;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import cl.pojos.Medico;
+package bean;
+
 import cl.pojos.Usuario;
 import cl.service.UsuarioFacadeLocal;
-import java.util.Date;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -19,33 +20,24 @@ import javax.faces.context.FacesContext;
  * @author Dany
  */
 @Named(value = "usuarioBean")
-@RequestScoped
-public class usuarioBean {
+@SessionScoped
+public class usuarioBean implements Serializable {
 
+    @EJB
     private UsuarioFacadeLocal usuarioFacade;
 
-    private Usuario usuario;
-    /**
-     * Creates a new instance of usuarioBean
-     */
     private String rut;
     private String nombre;
     private String apellido;
-    private Date fechaNac;
+    private Date fechaNacimiento;
     private String direccion;
-    private int telefono;
+    private short numero;
     private String clave;
+
+    private Usuario usuario;
 
     public usuarioBean() {
         usuario = new Usuario();
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public String getRut() {
@@ -72,12 +64,12 @@ public class usuarioBean {
         this.apellido = apellido;
     }
 
-    public Date getFechaNac() {
-        return fechaNac;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFechaNac(Date fechaNac) {
-        this.fechaNac = fechaNac;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getDireccion() {
@@ -88,12 +80,12 @@ public class usuarioBean {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
-        return telefono;
+    public short getNumero() {
+        return numero;
     }
 
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
+    public void setNumero(short numero) {
+        this.numero = numero;
     }
 
     public String getClave() {
@@ -104,22 +96,43 @@ public class usuarioBean {
         this.clave = clave;
     }
 
-    public String create() {
-        Usuario u = new Usuario();
-        u.setRut(usuario.getRut());
-        u.setNombre(usuario.getNombre());
-        u.setApellido(usuario.getApellido());
-        u.setFechaNacimiento(usuario.getFechaNacimiento());
-        u.setDireccion(usuario.getDireccion());
-        u.setTelefono(usuario.getTelefono());
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-        usuarioFacade.create(u);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario registrado con éxito"));
-return "index";
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String create() {
+        try {
+            Usuario u = new Usuario();
+            u.setRut(usuario.getRut());
+            u.setNombre(usuario.getNombre());
+            u.setApellido(usuario.getApellido());
+            u.setFechaNacimiento(usuario.getFechaNacimiento());
+            u.setDireccion(usuario.getDireccion());
+            u.setTelefono(usuario.getTelefono());
+            u.setClave(usuario.getClave());
+            usuarioFacade.create(u);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario creado"));
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario ya existe, revise lo ingresado"));
+
+        }
+
+        return "index";
     }
 
     public String insertarUsuario() {
-        usuarioFacade.insertarUsuario(usuario.getRut(), usuario.getNombre(), usuario.getApellido(), new Date(), usuario.getDireccion(), usuario.getTelefono(), usuario.getClave());
+        try {
+            usuarioFacade.insertarUsuario(usuario);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario Creado"));
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario ya existe, revise lo ingresado"));
+        }   
         return "index";
     }
 

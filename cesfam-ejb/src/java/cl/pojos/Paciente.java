@@ -8,6 +8,7 @@ package cl.pojos;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -77,6 +79,8 @@ public class Paciente implements Serializable {
     @Size(min = 1, max = 25)
     @Column(name = "EMAIL")
     private String email;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pacienteRutPaciente")
+    private Carnet carnet;
     @JoinColumn(name = "CARNET_FAM_COD_FAM", referencedColumnName = "COD_CARNET_FAM")
     @ManyToOne(optional = false)
     private CarnetFam carnetFamCodFam;
@@ -155,6 +159,14 @@ public class Paciente implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Carnet getCarnet() {
+        return carnet;
+    }
+
+    public void setCarnet(Carnet carnet) {
+        this.carnet = carnet;
     }
 
     public CarnetFam getCarnetFamCodFam() {

@@ -120,7 +120,7 @@ public class medicoBean implements Serializable{
 
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "index.xhtml";
+        return "index";
     }
 
 

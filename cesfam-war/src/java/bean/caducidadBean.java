@@ -12,11 +12,13 @@ import cl.service.CaducidadFacadeLocal;
 import cl.service.LoteMedicamentoFacadeLocal;
 import cl.service.MedicamentoFacadeLocal;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -38,6 +40,9 @@ public class caducidadBean {
     private int codCaducidad;
     private int cantidad;
     private String motivo;
+    private String estado;
+        private List<Caducidad> selectedCaducidades;
+
     //
     private Caducidad caducidad;
     private Medicamento medicamento;
@@ -47,6 +52,10 @@ public class caducidadBean {
         caducidad = new Caducidad();
         medicamento = new Medicamento();
         loteMedicamento = new LoteMedicamento();
+    }
+
+    public List<Caducidad> getCaducidades() {
+        return caducidadFacade.findAll();
     }
 
     public int getCodCaducidad() {
@@ -73,6 +82,14 @@ public class caducidadBean {
         this.motivo = motivo;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public Caducidad getCaducidad() {
         return caducidad;
     }
@@ -97,6 +114,22 @@ public class caducidadBean {
         this.loteMedicamento = loteMedicamento;
     }
 
+    public List<Caducidad> getSelectedCaducidades() {
+        selectedCaducidades=caducidadFacade.findAll();
+        return selectedCaducidades;
+    }
+
+    public void setSelectedCaducidades(List<Caducidad> selectedCaducidades) {
+        this.selectedCaducidades = selectedCaducidades;
+    }
+    
+     public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Caducidad Selected", ((Caducidad) event.getObject()).getCodCaducidad().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    
+
     public String create() {
         try {
             Caducidad c = new Caducidad();
@@ -107,11 +140,12 @@ public class caducidadBean {
             c.setFechaEmision(new Date());
             c.setCantidad(caducidad.getCantidad());
             c.setMotivo(caducidad.getMotivo());
+            c.setEstado("No Descontado (Stock Físico)");
 
             if (medicamentoFacade.find(medicamento.getCodMedicamento()).getCodMedicamento() == loteMedicamentoFacade.find(loteMedicamento.getCodLoteMed()).getMedicamentoCodMedicamento().getCodMedicamento()) {
 
                 caducidadFacade.create(c);
-                loteMedicamentoFacade.salidaStock(medicamentoFacade.find(medicamento.getCodMedicamento()), loteMedicamentoFacade.find(loteMedicamento.getCodLoteMed()), caducidad.getCantidad());
+                //loteMedicamentoFacade.salidaStock(medicamentoFacade.find(medicamento.getCodMedicamento()), loteMedicamentoFacade.find(loteMedicamento.getCodLoteMed()), caducidad.getCantidad());
 
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Operación realizada exitosamente", ""));
             } else {
@@ -126,5 +160,17 @@ public class caducidadBean {
 
         return "index";
 
+    }
+
+    public String edit() {
+        try {
+             Caducidad c = caducidadFacade.find(caducidad.getCodCaducidad());
+        c.setEstado(caducidad.getEstado());
+        caducidadFacade.edit(c);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Caducidad Actualizada, se ha descontado del Stock Físico"));
+        } catch (Exception e) {
+        }
+       
+        return "index";
     }
 }

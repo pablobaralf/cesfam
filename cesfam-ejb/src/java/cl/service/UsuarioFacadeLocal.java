@@ -31,5 +31,5 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
-void insertarUsuario(String rut, String nombre, String apellido, Date date, String direccion, int telefono, String clave);
+void insertarUsuario(Usuario usuario);
 }

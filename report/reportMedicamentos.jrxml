@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="700" pageHeight="842" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="30ced61b-6171-40b8-9272-99054d9f1d85">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from medicamento]]>
+	</queryString>
+	<field name="[0]" class="java.lang.Object"/>
+	<field name="[1]" class="java.lang.Object"/>
+	<field name="[2]" class="java.lang.Object"/>
+	<field name="[3]" class="java.lang.Object"/>
+	<field name="[4]" class="java.lang.Object"/>
+	<field name="[5]" class="java.lang.Object"/>
+	<field name="[6]" class="java.lang.Object"/>
+	<field name="[7]" class="java.lang.Object"/>
+	<field name="[8]" class="java.lang.Object"/>
+	<field name="[9]" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="131" y="31" width="409" height="48" uuid="e38ea1b1-a841-4466-9bd8-1910e4f61783"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Cambria" size="36"/>
+				</textElement>
+				<text><![CDATA[Reporte de Medicamentos]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h:mm a">
+				<reportElement x="0" y="-4" width="100" height="20" uuid="ccb72028-9e59-4f71-9ee3-87f716b7b055"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="611" y="0" width="49" height="29" uuid="d804f80a-63b6-43ca-a439-8579edbf91ec"/>
+				<imageExpression><![CDATA["C:\\Users\\Dany\\Desktop\\ces.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="73" height="20" uuid="591b5f8b-5780-43df-809d-99d80ea2c402"/>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="58" y="0" width="73" height="20" uuid="e369a8fd-ea0e-433e-aebc-b16fd9634460"/>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="0" width="73" height="20" uuid="cb0d77d9-544e-4380-be1f-9820f4f3a74d"/>
+				<text><![CDATA[Principio Activo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="0" width="73" height="20" uuid="f0098ac0-6835-4fc1-a050-a4697b926924"/>
+				<text><![CDATA[Componentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="0" width="73" height="20" uuid="da2cf959-82fd-4a62-ac85-7edf43c24f7e"/>
+				<text><![CDATA[Contenido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="73" height="20" uuid="3363f96f-b299-4cf9-abe4-b8cdc46a0ed7"/>
+				<text><![CDATA[Gramaje]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="0" width="73" height="20" uuid="8fe0d270-ec10-4b3f-a07f-096dc3d328b1"/>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="0" width="73" height="20" uuid="acc33320-6963-4d27-9342-c36f2e92f85f"/>
+				<text><![CDATA[Fabricante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="537" y="0" width="73" height="20" uuid="78af3b54-78d8-4bf8-9152-f4a05bcff976"/>
+				<text><![CDATA[Stock Disponible]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="594" y="0" width="100" height="20" uuid="7e4ae302-f885-48aa-90e8-d620cbc00e9e"/>
+				<text><![CDATA[Stock Físico]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="73" height="20" uuid="66b6675b-6629-4dff-a12e-a3252abb69d4"/>
+				<textFieldExpression><![CDATA[""+$F{[0]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="58" y="0" width="73" height="20" uuid="cc94c559-5abe-4f4a-a6b3-2335bfc5cda3"/>
+				<textFieldExpression><![CDATA[""+$F{[1]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="0" width="73" height="20" uuid="f969db8b-6e7e-4095-966b-a2653a3c3dd9"/>
+				<textFieldExpression><![CDATA[""+$F{[2]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="0" width="73" height="20" uuid="2d401869-a150-4fac-ac76-16fd7685fcec"/>
+				<textFieldExpression><![CDATA[""+$F{[3]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="73" height="20" uuid="731d6b84-f201-425c-856d-2778b02a9945"/>
+				<textFieldExpression><![CDATA[""+$F{[4]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="73" height="20" uuid="2d2fe6a0-8ed3-427c-b50b-d69847033ef7"/>
+				<textFieldExpression><![CDATA[""+$F{[5]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="73" height="20" uuid="04dc5947-54f4-4b09-83a3-3ec7c1cb010e"/>
+				<textFieldExpression><![CDATA[""+$F{[6]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="452" y="0" width="73" height="20" uuid="e9cd2310-a27e-4efd-b0a4-dcda79b69ee3"/>
+				<textFieldExpression><![CDATA[""+$F{[7]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="537" y="0" width="73" height="20" uuid="4f40e988-7af4-462f-877c-96ee3833a91b"/>
+				<textFieldExpression><![CDATA[""+$F{[8]}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="594" y="0" width="100" height="20" uuid="ce77b852-7e7f-4f02-b295-11d76006175b"/>
+				<textFieldExpression><![CDATA[""+$F{[9]}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

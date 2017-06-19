@@ -38,7 +38,7 @@ public class FuncionarioFacade extends AbstractFacade<Funcionario> implements Fu
         Funcionario f = null;
         try {
 
-            Query query = em.createNativeQuery("SELECT * FROM Funcionario f join Usuario u on f.rut=u.rut WHERE f.cod_funcionario=?codFun and u.clave=?claveUs", Funcionario.class);
+            Query query = em.createNativeQuery("SELECT * FROM Funcionario f join Usuario u on f.rut=u.rut WHERE f.cod_funcionario=?codFun and u.clave=ora_hash(?claveUs)", Funcionario.class);
             query.setParameter("codFun", funcionario.getCodFuncionario());
             query.setParameter("claveUs", usuario.getClave());
             List<Funcionario> lista = query.getResultList();

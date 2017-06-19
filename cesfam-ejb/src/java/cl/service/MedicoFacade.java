@@ -36,7 +36,7 @@ public class MedicoFacade extends AbstractFacade<Medico> implements MedicoFacade
         Medico m = null;
         try {
 
-            Query query = em.createNativeQuery("SELECT * FROM Medico m join Usuario u on m.rut=u.rut WHERE m.COD_MEDICO=?codMed and u.clave=?claveUs", Medico.class);
+            Query query = em.createNativeQuery("SELECT * FROM Medico m join Usuario u on m.rut=u.rut WHERE m.COD_MEDICO=?codMed and u.clave=ora_hash(?claveUs)", Medico.class);
             query.setParameter("codMed", medico.getCodMedico());
             query.setParameter("claveUs", usuario.getClave());
             List<Medico> lista = query.getResultList();

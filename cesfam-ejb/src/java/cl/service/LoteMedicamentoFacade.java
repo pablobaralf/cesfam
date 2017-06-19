@@ -39,7 +39,7 @@ public class LoteMedicamentoFacade extends AbstractFacade<LoteMedicamento> imple
         List<Object[]> resultados = new ArrayList<>();
 
         Query query = em.createNativeQuery("SELECT m.cod_medicamento, m.descripcion_medicamento, m.principio_activo, m.componentes, m.contenido, m.gramaje, t.descripcion_tipo,\n" +
-"               f.descripcion_fabricante, total_stock_medicamentos(cod_medicamento) FROM Medicamento m join tipo t on m.TIPO_COD_TIPO=t.COD_TIPO\n" +
+"               f.descripcion_fabricante, (total_stock_medicamentos(cod_medicamento)-total_cantidad_caduc(cod_medicamento)), total_stock_medicamentos(cod_medicamento) FROM Medicamento m join tipo t on m.TIPO_COD_TIPO=t.COD_TIPO\n" +
 "                join fabricante f on m.FABRICANTE_COD_FABRICANTE=f.COD_FABRICANTE ORDER BY cod_medicamento");
         resultados.addAll(query.getResultList());
 

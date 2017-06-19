@@ -104,7 +104,7 @@ public class loteMedBean {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Lote Ingresado"));
 
         } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error lote ya existe"));
 
         }
 
@@ -112,23 +112,5 @@ public class loteMedBean {
 
     }
 
-//    public void pdfView() {
-//        lista = getLotes().toString();
-//
-//        Document document = new Document(PageSize.A4);
-//        System.out.println("document created");
-//        try {
-//            PdfWriter.getInstance(document, new FileOutputStream("HelloRoco.pdf"));
-//            document.addTitle(new Date().toString());
-//            System.out.println("write instance created..");
-//            document.open();
-//            System.out.println();
-//            Paragraph p1 = new Paragraph(loteFacade.pruebita());
-//            document.add(p1);
-//
-//        } catch (Exception e) {
-//            System.out.println(e);
-//        }
-//        document.close();
-//    }
+
 }

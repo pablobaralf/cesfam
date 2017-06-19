@@ -5,46 +5,38 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Registro de Usuarios</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
-
-
+       
         <f:view>
 
 
             <h:form id="fUsuario">
-                           <div style="display: block; text-align: right">
-        <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
-        <p:separator/>
-        <p:link value="Volver Menú" outcome="indexFuncionario"/>
-        </div>
                 <p:growl id="msg"/>
-                <h1><h:outputText value="Registrar Usuario"/></h1>
+                <h1><h:outputText value="Create/Edit"/></h1>
                 <p:panelGrid columns="2">
                     <p:outputLabel value="Rut:" for="rut" />
-                    <p:inputText id="rut" value="#{usuarioBean.usuario.rut}" title="Rut" required="true" requiredMessage="El rut es requerido"/>
+                    <p:inputText id="rut" value="#{usuarioBean.usuario.rut}" title="Rut" validator="#{validacionesBean.validarRut}" required="true" requiredMessage="The Rut field is required."/>
                     <p:outputLabel value="Nombre:" for="nombre" />
-                    <p:inputText id="nombre" value="#{usuarioBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="El nombre es requerido"/>
+                    <p:inputText id="nombre" value="#{usuarioBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
                     <p:outputLabel value="Apellido:" for="apellido" />
-                    <p:inputText id="apellido" value="#{usuarioBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="El apellido es requerido"/>
-                    <p:outputLabel value="Fecha de Nacimiento:" for="fechaNacimiento" />
-                    <p:calendar id="fechaNacimiento" value="#{usuarioBean.usuario.fechaNacimiento}" title="FechaNacimiento" required="true" requiredMessage="La fecha de nacimiento es requerida"/>        
-                    <p:outputLabel value="Dirección:" for="direccion" />
-                    <p:inputText id="direccion" value="#{usuarioBean.usuario.direccion}" title="Direccion" required="true" requiredMessage="La dirección de domicilio es requerida"/>
-                    <p:outputLabel value="Teléfono o Celular:" for="telefono" />
-                    <p:inputText id="telefono" value="#{usuarioBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="El número de teléfono o celular es requerido"/>
+                    <p:inputText id="apellido" value="#{usuarioBean.usuario.apellido}" title="Apellido" required="true" requiredMessage="The Apellido field is required."/>
+                    <p:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
+                    <p:calendar id="fechaNacimiento" value="#{usuarioBean.usuario.fechaNacimiento}" title="FechaNacimiento" required="true" requiredMessage="The FechaNacimiento field is required."/>
+                    <p:outputLabel value="Direccion:" for="direccion" />
+                    <p:inputText id="direccion" value="#{usuarioBean.usuario.direccion}" title="Direccion" required="true" requiredMessage="The Direccion field is required."/>
+                    <p:outputLabel value="Telefono:" for="telefono" />
+                    <p:inputText id="telefono" value="#{usuarioBean.usuario.telefono}" title="Telefono" required="true" requiredMessage="The Telefono field is required."/>
                     <p:outputLabel value="Clave:" for="clave" />
-                    <p:inputText id="clave" value="#{usuarioBean.usuario.clave}" title="Clave" required="true" requiredMessage="La clave de usuario es requerida"/>
+                    <p:inputText id="clave" value="#{usuarioBean.usuario.clave}" title="Clave" required="true" requiredMessage="The Clave field is required."/>
+                    <p:commandButton value="Agregar Usuario" actionListener="#{usuarioBean.insertarUsuario()}" update="fUsuario"/>
                 </p:panelGrid>
-
-                <p:commandButton value="Registrar Usuario" actionListener="#{usuarioBean.create()}" update="fUsuario"  />
-
             </h:form>
         </f:view>
 
-
-
+        
+        
     </h:body>
 </html>
 

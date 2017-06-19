@@ -12,7 +12,7 @@
     <h:body>
         <h:form id="fTutor">
             <div style ="display: block; text-align: right">
-                <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/>
+                <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/><br/>
                 <p:link value="Volver Menú" outcome="indexMedico" />
             </div>
 
@@ -21,7 +21,7 @@
             <h1><h:outputText value="Registro de Tutor para Paciente"/></h1>
             <p:panelGrid columns="2">
                 <p:outputLabel value="Rut:" for="rutTutor" />
-                <p:inputText id="rutTutor" value="#{tutorBean.tutor.rutTutor}"  required="true" requiredMessage="El Rut es requerido"/>
+                <p:inputText id="rutTutor" value="#{tutorBean.tutor.rutTutor}" validator="#{validacionesBean.validateRutFaces}"  required="true" requiredMessage="El Rut es requerido"/>
                 <p:outputLabel value="Nombre:" for="nombre" />
                 <p:inputText id="nombre" value="#{tutorBean.tutor.nombre}" title="Nombre"  required="true" requiredMessage="El Nombre es requerido"/>
                 <p:outputLabel value="Apellido:" for="apellido" />

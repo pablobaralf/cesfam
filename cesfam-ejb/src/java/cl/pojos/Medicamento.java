@@ -191,7 +191,6 @@ public class Medicamento implements Serializable {
         this.tipoCodTipo = tipoCodTipo;
     }
 
-
     @XmlTransient
     public List<Reserva> getReservaList() {
         return reservaList;

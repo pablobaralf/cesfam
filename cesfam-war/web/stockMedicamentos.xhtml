@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Administración de Stock</title>
+
     </h:head>
     <h:body>
 
@@ -65,9 +66,15 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Stock"/>
+                            <h:outputText value="Stock Disponible"/>
                         </f:facet>
                         <h:outputText value="#{item[8]}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Stock Físico"/>
+                        </f:facet>
+                        <h:outputText value="#{item[9]}"/>
                     </p:column>
                 </p:dataTable>
             </h:form>

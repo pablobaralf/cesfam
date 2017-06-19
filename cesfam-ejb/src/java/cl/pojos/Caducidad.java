@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Caducidad.findByCodCaducidad", query = "SELECT c FROM Caducidad c WHERE c.codCaducidad = :codCaducidad"),
     @NamedQuery(name = "Caducidad.findByFechaEmision", query = "SELECT c FROM Caducidad c WHERE c.fechaEmision = :fechaEmision"),
     @NamedQuery(name = "Caducidad.findByMotivo", query = "SELECT c FROM Caducidad c WHERE c.motivo = :motivo"),
-    @NamedQuery(name = "Caducidad.findByCantidad", query = "SELECT c FROM Caducidad c WHERE c.cantidad = :cantidad")})
+    @NamedQuery(name = "Caducidad.findByCantidad", query = "SELECT c FROM Caducidad c WHERE c.cantidad = :cantidad"),
+    @NamedQuery(name = "Caducidad.findByEstado", query = "SELECT c FROM Caducidad c WHERE c.estado = :estado")})
 public class Caducidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,6 +58,11 @@ public class Caducidad implements Serializable {
     @NotNull
     @Column(name = "CANTIDAD")
     private short cantidad;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "ESTADO")
+    private String estado;
     @JoinColumn(name = "LOTE_MED_COD_LOTE", referencedColumnName = "COD_LOTE_MED")
     @ManyToOne(optional = false)
     private LoteMedicamento loteMedCodLote;
@@ -71,11 +77,12 @@ public class Caducidad implements Serializable {
         this.codCaducidad = codCaducidad;
     }
 
-    public Caducidad(Integer codCaducidad, Date fechaEmision, String motivo, short cantidad) {
+    public Caducidad(Integer codCaducidad, Date fechaEmision, String motivo, short cantidad, String estado) {
         this.codCaducidad = codCaducidad;
         this.fechaEmision = fechaEmision;
         this.motivo = motivo;
         this.cantidad = cantidad;
+        this.estado = estado;
     }
 
     public Integer getCodCaducidad() {
@@ -108,6 +115,14 @@ public class Caducidad implements Serializable {
 
     public void setCantidad(short cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public LoteMedicamento getLoteMedCodLote() {

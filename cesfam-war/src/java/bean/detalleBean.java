@@ -144,7 +144,7 @@ public class detalleBean {
             totalCantidad = 1;
         }
 
-        if (prescripcionFacade.find(prescripcion.getCodPrescripcion()).getDuracionTratamiento() < 10) {
+        if (prescripcionFacade.find(prescripcion.getCodPrescripcion()).getDuracionTratamiento() < 11) {
 
             d.setCantidad((short) totalCantidad);
 
@@ -166,19 +166,24 @@ public class detalleBean {
     }
 
     public String eliminar() {
-        Detalle d = detalleFacade.find(detalle.getCodDetalle());
-        if (d.getPrescripcionCodPrescripcion().getEstado().equals("No Entregada")) {
-            loteMedicamentoFacade.cancelarSalida(d.getMedicamentoCodMedicamento(), d.getLoteMedCodLote(), d.getCantidad());
+        try {
+            Detalle d = detalleFacade.find(detalle.getCodDetalle());
+            if (d.getPrescripcionCodPrescripcion().getEstado().equals("No Entregada")) {
+                loteMedicamentoFacade.cancelarSalida(d.getMedicamentoCodMedicamento(), d.getLoteMedCodLote(), d.getCantidad());
 
-            detalleFacade.remove(d);
+                detalleFacade.remove(d);
 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Detalle Eliminado, Stock restaurado"));
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error, detalle ya fue entregado, no figura en el Stock"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Detalle Eliminado, Stock restaurado"));
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error, detalle ya fue entregado, no figura en el Stock"));
+
+            }
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error, detalle no existe"));
 
         }
-
         return "index";
-    }
 
+    }
 }

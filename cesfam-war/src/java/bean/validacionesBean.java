@@ -34,8 +34,8 @@ public class validacionesBean {
 
         }
     }
-    
-     public void validateCodigos(FacesContext arg0, UIComponent arg1, Object arg2)
+
+    public void validateCodigos(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
         if (((String) arg2).length() < 1) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Ingrese al menos 5 carácteres", ""));
@@ -57,7 +57,7 @@ public class validacionesBean {
 
         }
     }
-    
+
     public void validateFechaNacimiento(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
         Date fechaActual = new Date();
         Date fechaNacimiento = (Date) arg2;
@@ -90,54 +90,54 @@ public class validacionesBean {
 
         }
     }
-    
+
     public void validateGramaje(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
         int gramaje = Integer.parseInt(arg2.toString());
-        if (gramaje<1||gramaje>2000) {
+        if (gramaje < 1 || gramaje > 2000) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Porfavor, ingrese un dígito entre 1 y 2000 mg", ""));
 
         }
     }
-    
+
     public void validateContenido(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
         int gramaje = Integer.parseInt(arg2.toString());
-        if (gramaje<1||gramaje>100) {
+        if (gramaje < 1 || gramaje > 100) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Porfavor, ingrese un contenido entre 1 y 100 dósis", ""));
 
         }
     }
-    
-     public void validateCantidadDiaria(FacesContext arg0, UIComponent arg1, Object arg2)
+
+    public void validateCantidadDiaria(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
-        int cantidadDiaria = Integer.parseInt(arg2.toString());
-        if (cantidadDiaria<1||cantidadDiaria>4) {
-            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Porfavor, ingrese una cantidad diaria entre 1 y 4", ""));
+        double cantidadDiaria = Double.parseDouble(arg2.toString());
+        if (cantidadDiaria < 0.1 || cantidadDiaria > 4.0) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Porfavor, ingrese una cantidad diaria entre 0.1 y 4.0", ""));
 
         }
     }
-     
-      public void validateDuracionTratamiento(FacesContext arg0, UIComponent arg1, Object arg2)
+
+    public void validateDuracionTratamiento(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
         int duracionTratamiento = Integer.parseInt(arg2.toString());
-        if (duracionTratamiento<1) {
+        if (duracionTratamiento < 1) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Porfavor, ingrese una cantidad diaria entre 1 y 4", ""));
 
         }
     }
-      
-      public void validateNumeroTelefonico(FacesContext arg0, UIComponent arg1, Object arg2)
+
+    public void validateNumeroTelefonico(FacesContext arg0, UIComponent arg1, Object arg2)
             throws ValidatorException {
-          String numero = arg2.toString();
+        String numero = arg2.toString();
         if (numero.length() < 9) {
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "El número de contacto debe tener al menos 9 dígitos", ""));
 
         }
-        
+
     }
-      
-          public boolean validarRut(String rut) {
+
+    public boolean validarRut(String rut) {
 
         boolean validacion = false;
         try {
@@ -161,9 +161,33 @@ public class validacionesBean {
         }
         return validacion;
     }
-     
-   
     
-    
-    
+       public void validateRutFaces(FacesContext arg0, UIComponent arg1, Object arg2)
+            throws ValidatorException {
+           
+            boolean validacion = false;
+            String rut = arg2.toString();
+            
+            rut = rut.toUpperCase();
+            rut = rut.replace(".", "");
+            rut = rut.replace("-", "");
+            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
+
+            char dv = rut.charAt(rut.length() - 1);
+
+            int m = 0, s = 1;
+            for (; rutAux != 0; rutAux /= 10) {
+                s = (s + rutAux % 10 * (9 - m++ % 6)) % 11;
+            }
+            if (dv == (char) (s != 0 ? s + 47 : 75)) {
+                validacion = true;
+            }
+
+        if (!validacion) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "El rut ingresado es inválido", ""));
+
+        }
+
+    }
+
 }

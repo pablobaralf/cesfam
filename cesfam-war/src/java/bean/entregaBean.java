@@ -94,8 +94,9 @@ public class entregaBean {
     }
 
     public String create() {
-        Entrega e = new Entrega();
-        
+        try {
+            Entrega e = new Entrega();
+            
         e.setFormularioCodFormulario(formularioFacade.find(formulario.getCodFormulario()));
         e.setPrescripcionCodPrescripcion(prescripcionFacade.find(prescripcion.getCodPrescripcion()));
         Prescripcion p = prescripcionFacade.find(prescripcion.getCodPrescripcion());
@@ -107,6 +108,11 @@ public class entregaBean {
         entregaFacade.create(e);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Prescripción Entregada!", ""));
 
+        } catch (Exception e) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Prescripción ya fué entregada", ""));
+
+        }
+        
         return "index";
     }
 

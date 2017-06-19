@@ -7,9 +7,7 @@ package cl.pojos;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,15 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -58,7 +53,7 @@ public class Prescripcion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CANTIDAD_DIARIA")
-    private short cantidadDiaria;
+    private double cantidadDiaria;
     @Basic(optional = false)
     @NotNull
     @Column(name = "DURACION_TRATAMIENTO")
@@ -71,10 +66,6 @@ public class Prescripcion implements Serializable {
     @JoinColumn(name = "MEDICO_COD_MEDICO", referencedColumnName = "COD_MEDICO")
     @ManyToOne(optional = false)
     private Medico medicoCodMedico;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "prescripcionCodPrescripcion")
-    private List<Detalle> detalleList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "prescripcionCodPrescripcion")
-    private Entrega entrega;
 
     public Prescripcion() {
     }
@@ -83,7 +74,7 @@ public class Prescripcion implements Serializable {
         this.codPrescripcion = codPrescripcion;
     }
 
-    public Prescripcion(String codPrescripcion, Date fechaEmision, short cantidadDiaria, short duracionTratamiento, String estado) {
+    public Prescripcion(String codPrescripcion, Date fechaEmision, double cantidadDiaria, short duracionTratamiento, String estado) {
         this.codPrescripcion = codPrescripcion;
         this.fechaEmision = fechaEmision;
         this.cantidadDiaria = cantidadDiaria;
@@ -107,11 +98,11 @@ public class Prescripcion implements Serializable {
         this.fechaEmision = fechaEmision;
     }
 
-    public short getCantidadDiaria() {
+    public double getCantidadDiaria() {
         return cantidadDiaria;
     }
 
-    public void setCantidadDiaria(short cantidadDiaria) {
+    public void setCantidadDiaria(double cantidadDiaria) {
         this.cantidadDiaria = cantidadDiaria;
     }
 
@@ -137,23 +128,6 @@ public class Prescripcion implements Serializable {
 
     public void setMedicoCodMedico(Medico medicoCodMedico) {
         this.medicoCodMedico = medicoCodMedico;
-    }
-
-    @XmlTransient
-    public List<Detalle> getDetalleList() {
-        return detalleList;
-    }
-
-    public void setDetalleList(List<Detalle> detalleList) {
-        this.detalleList = detalleList;
-    }
-
-    public Entrega getEntrega() {
-        return entrega;
-    }
-
-    public void setEntrega(Entrega entrega) {
-        this.entrega = entrega;
     }
 
     @Override

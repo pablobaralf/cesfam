@@ -36,7 +36,7 @@ public class prescripcionBean {
     private FormularioFacadeLocal formularioFacade;
 
     private String codPrescripcion;
-    private int cantidadDiaria;
+    private double cantidadDiaria;
     private int duracionTratamiento;
     //
     private Prescripcion prescripcion;
@@ -59,11 +59,11 @@ public class prescripcionBean {
         this.codPrescripcion = codPrescripcion;
     }
 
-    public int getCantidadDiaria() {
+    public double getCantidadDiaria() {
         return cantidadDiaria;
     }
 
-    public void setCantidadDiaria(int cantidadDiaria) {
+    public void setCantidadDiaria(double cantidadDiaria) {
         this.cantidadDiaria = cantidadDiaria;
     }
 
@@ -92,8 +92,9 @@ public class prescripcionBean {
     }
 
     public String create() {
-        Prescripcion p = new Prescripcion();
-        p.setMedicoCodMedico(medicoFacade.find(medico.getCodMedico()));
+        try {
+            Prescripcion p = new Prescripcion();
+        p.setMedicoCodMedico(medicoBean.verificarSesion());
         p.setCodPrescripcion(prescripcion.getCodPrescripcion());
         p.setFechaEmision(new Date());
         p.setCantidadDiaria(prescripcion.getCantidadDiaria());
@@ -103,6 +104,11 @@ public class prescripcionBean {
         prescripcionFacade.create(p);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prescripción Ingresada"));
 
+        } catch (Exception e) {
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Prescripción ya existe"));
+
+        }
+        
         return "index";
     }
 

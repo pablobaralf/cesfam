@@ -10,7 +10,7 @@
     </h:head>
     <h:body>
  <div style="display: block; text-align: right">
-            <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/>
+     <p:outputLabel value="Bienvenido(a) #{funcionarioBean.verificarSesion().rut.nombre} #{funcionarioBean.verificarSesion().rut.apellido}"/><br/>
             <p:link value="Cerrar Sesión" outcome="index"/>
             <p:separator/>
         </div>
@@ -36,14 +36,15 @@
             <p:submenu label ="Entrega de Medicamentos">
                     <p:menuitem value="Entrega de Prescripción" outcome="entregarPrescripcion"/>      
                     <p:menuitem value="Prescripciones de Medicamentos" outcome="prescripciones"/>      
-                <p:submenu label="Detalles de Prescripciones">
-                    <p:menuitem value="Preparar Nuevo Detalle" outcome="prepararDetalle"/>      
                     <p:menuitem value="Detalles Generados" outcome="detalles"/>
-                </p:submenu> 
             </p:submenu>
             <p:menuitem value="Caducar Medicamentos" outcome="caducarMedicamento"/>
+                        <p:menuitem value="Registrar Usuario" outcome="registrarUsuario"/>
+
 
         </p:menubar>
+                       <div style=" margin: auto; width:666px;height:456px;filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25;background:url(images/Imagen.png)">
+            </div>
     </h:body>
 </html>
 

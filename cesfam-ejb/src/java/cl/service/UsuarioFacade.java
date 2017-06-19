@@ -32,18 +32,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
     
     //Insertar usuario con cifrado de clave
-    public void insertarUsuario(String rut, String nombre, String apellido, Date date, String direccion, int telefono, String clave){
-
+    public void insertarUsuario(Usuario usuario){
+   
         try {
-            Query query = em.createNativeQuery("INSERT INTO Usuario (RUT, NOMBRE, APELLIDO, FECHA_NACIMIENTO, DIRECCION, TELEFONO, CLAVE)"
-                    + " values(?rutUs, ?nombreUs, ?apellidoUs, ?fechaNacimientoUs, ?direccionUs, ?telefonoUs, ?claveUs)");
-            query.setParameter("rutUs", rut);
-            query.setParameter("nombreUs", nombre);
-            query.setParameter("apellidoUs", apellido);
-            query.setParameter("fechaNacimientoUs", date);
-            query.setParameter("direccionUs", direccion);
-            query.setParameter("telefonoUs", telefono);
-            query.setParameter("claveUs", clave);
+            Query query = em.createNativeQuery("INSERT INTO Usuario (RUT, NOMBRE, APELLIDO, FECHA_NACIMIENTO, DIRECCION, TELEFONO, CLAVE)\n" +
+"                     values(?rutUs, ?nombreUs, ?apellidoUs, ?fechaNacimientoUs, ?direccionUs, ?telefonoUs, ora_hash(?claveUs))");
+            query.setParameter("rutUs", usuario.getRut());
+            query.setParameter("nombreUs", usuario.getNombre());
+            query.setParameter("apellidoUs", usuario.getApellido());
+            query.setParameter("fechaNacimientoUs", usuario.getFechaNacimiento());
+            query.setParameter("direccionUs", usuario.getDireccion());
+            query.setParameter("telefonoUs", usuario.getTelefono());
+            query.setParameter("claveUs", usuario.getClave());
 
             query.executeUpdate();
             

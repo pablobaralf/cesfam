@@ -10,38 +10,42 @@
     </h:head>
     <h:body>
         <div style="display: block; text-align: right">
-            <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/>
+            <p:outputLabel value="Bienvenido(a) #{medicoBean.verificarSesion().rut.nombre} #{medicoBean.verificarSesion().rut.apellido}"/><br/>
             <p:link value="Cerrar Sesión" outcome="index"/>
             <p:separator/>
         </div>
 
         <p:menubar>
-            <p:submenu label="Registros">                  
-                <p:menuitem value="Registro de Paciente" outcome="registrarPaciente"/>      
+            <p:submenu label="Registros">
+                <p:menuitem value="Registro de Paciente" outcome="registrarPaciente"/>
                 <p:menuitem value="Registro de Tutor" outcome="registrarTutor"/>
             </p:submenu>
             <p:submenu label="Prescripciones">
-                <p:menuitem value="Ingresar Prescripción" outcome="ingresoPrescripcion"/> 
-                <p:menuitem value="Prescripciones Generadas" outcome="prescripciones"/>      
-
-            </p:submenu> 
+                <p:menuitem value="Ingresar Prescripción" outcome="ingresoPrescripcion"/>
+                <p:menuitem value="Prescripciones Generadas" outcome="prescripciones"/>
+                <p:menuitem value="Preparar Nuevo Detalle" outcome="prepararDetalle"/>
+            </p:submenu>
             <p:submenu label="Administración">
                 <p:submenu label="Medicamentos">
 
-                    <p:menuitem value="Stock Medicamentos" outcome="stockMedicamentos"/> 
-                    <p:menuitem value="Lotes de Medicamentos" outcome="lotesMedicamentos"/>      
-                </p:submenu> 
-                  <p:submenu label="Artículos Médicos">
+                    <p:menuitem value="Stock Medicamentos" outcome="stockMedicamentos"/>
+                    <p:menuitem value="Lotes de Medicamentos" outcome="lotesMedicamentos"/>
+                </p:submenu>
+                <p:submenu label="Artículos Médicos">
 
-                <p:menuitem value="Stock Artículos" outcome="stockArticulos"/> 
-                <p:menuitem value="Lotes de Artículos" outcome="lotesArticulos"/>      
-            </p:submenu> 
+                    <p:menuitem value="Stock Artículos" outcome="stockArticulos"/>
+                    <p:menuitem value="Lotes de Artículos" outcome="lotesArticulos"/>
+                </p:submenu>
+                            <p:menuitem value="Reporte de Medicamentos" outcome="reportes"/>
 
-            </p:submenu> 
-          
+
+            </p:submenu>
+
+
 
         </p:menubar>
-
+        <div style=" margin: auto; width:666px;height:456px;filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25;background:url(images/Imagen.png)">
+        </div>
     </h:body>
 </html>
 

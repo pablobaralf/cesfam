@@ -1,2 +1,9 @@
 /cesfam-ejb/build/
 /cesfam-ejb/dist/
+/nbproject/private/
+/cesfam-war/nbproject/private/
+/cesfam-ejb/nbproject/private/
+/cesfam-war/build/
+/build/
+/cesfam-war/dist/
+/dist/
